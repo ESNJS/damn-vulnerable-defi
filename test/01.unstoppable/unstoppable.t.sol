@@ -22,7 +22,7 @@ contract ChallengeUnstoppable is Test {
     /**
      * SETUP SCENARIO - NO NEED TO CHANGE ANYTHING HERE
      */
-    changePrank(deployer);
+    vm.startPrank(deployer);
     token = new DamnValuableToken();
     vault = new UnstoppableVault(token, deployer, deployer);
 
