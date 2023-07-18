@@ -38,8 +38,7 @@ contract ChallengeSideEntrance is Test {
      * CODE YOUR SOLUTION HERE
      */
     changePrank(player);
-    FlashLoanEtherReceiver receiver = new FlashLoanEtherReceiver();
-    receiver.init();
+    (new FlashLoanEtherReceiver()).init();
 
     /**
      * SUCCESS CONDITIONS - NO NEED TO CHANGE ANYTHING HERE
