@@ -14,17 +14,7 @@ contract FlashLoanEtherReceiver {
       mstore(calldataOffset, hex"9ab603b9") //flashLoan(uint256)
       mstore(add(calldataOffset, 0x04), ETHER_IN_POOL)
 
-      pop(
-        call(
-          gas(),
-          POOL,
-          0, // msg.value
-          calldataOffset,
-          0x44,
-          0, // return data offset
-          0 // return data length
-        )
-      )
+      pop(call(gas(), POOL, 0, calldataOffset, 0x44, 0, 0))
     }
 
     assembly {
@@ -32,17 +22,7 @@ contract FlashLoanEtherReceiver {
       mstore(0x40, add(calldataOffset, 0x44))
       mstore(calldataOffset, hex"3ccfd60b") //withdraw()
 
-      pop(
-        call(
-          gas(),
-          POOL,
-          0, // msg.value
-          calldataOffset,
-          0x44,
-          0, // return data offset
-          0 // return data length
-        )
-      )
+      pop(call(gas(), POOL, 0, calldataOffset, 0x44, 0, 0))
     }
   }
 
@@ -52,17 +32,7 @@ contract FlashLoanEtherReceiver {
       mstore(0x40, add(calldataOffset, 0x44))
       mstore(calldataOffset, hex"d0e30db0") //deposit()
 
-      pop(
-        call(
-          gas(),
-          POOL,
-          ETHER_IN_POOL, // msg.value
-          calldataOffset,
-          0x44,
-          0, // return data offset
-          0 // return data length
-        )
-      )
+      pop(call(gas(), POOL, ETHER_IN_POOL, calldataOffset, 0x44, 0, 0))
     }
   }
 
