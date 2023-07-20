@@ -113,8 +113,10 @@ contract ChallengeTheRewarder is Test {
     assertGt(playerRewards, 0);
 
     // The amount of rewards earned should be close to total available amount
-    uint256 delta = rewarderPool.REWARDS() - playerRewards;
-    assertLt(delta, 10 ** 17);
+    {
+      uint256 delta = rewarderPool.REWARDS() - playerRewards;
+      assertLt(delta, 10 ** 17);
+    }
 
     // Balance of DVT tokens in player and lending pool hasn't changed
     assertEq(liquidityToken.balanceOf(player), 0);
